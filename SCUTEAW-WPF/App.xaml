@@ -1,8 +1,8 @@
-﻿<Application x:Class="WpfLearning1.App"
+﻿<Application x:Class="SCUTEAW_App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WpfLearning1"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:SCUTEAW_App"
+             StartupUri="LoginWindow.xaml">
     <Application.Resources>
          
     </Application.Resources>

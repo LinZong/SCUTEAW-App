@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfLearning1
+namespace SCUTEAW_App
 {
     /// <summary>
     /// Interaction logic for App.xaml
