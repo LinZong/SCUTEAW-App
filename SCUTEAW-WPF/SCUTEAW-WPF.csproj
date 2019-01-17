@@ -104,4 +104,11 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>md $(ProjectDir)$(OutDir)NodeLibs 
+md $(ProjectDir)$(OutDir)Profiles
+xcopy $(SolutionDir)SCUTEAW-Lib\SCUTEAW-Lib\NodeLibs $(ProjectDir)$(OutDir)NodeLibs /E /Y
+xcopy  $(SolutionDir)SCUTEAW-Lib\SCUTEAW-Lib\Profiles $(ProjectDir)$(OutDir)Profiles /E /Y
+xcopy  $(ProjectDir)App.config $(ProjectDir)$(OutDir) /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

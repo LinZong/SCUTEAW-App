@@ -130,10 +130,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>md $(ProjectDir)$(OutDir)NodeLibs 
-md $(ProjectDir)$(OutDir)Profiles
-xcopy  $(ProjectDir)NodeLibs $(ProjectDir)$(OutDir)NodeLibs /E /Y
-xcopy  $(ProjectDir)Profiles $(ProjectDir)$(OutDir)Profiles /E /Y
-xcopy  $(ProjectDir)App.config $(ProjectDir)$(OutDir) /Y</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
