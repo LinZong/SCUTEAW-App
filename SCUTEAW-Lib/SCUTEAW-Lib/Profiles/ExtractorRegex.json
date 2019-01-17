@@ -1,0 +1,19 @@
+{
+    "MatchCsrfTokenRegex": "name=\"csrftoken\" value=\".*\"",
+    "ClearNoNeedCsrfTag": [
+        "name=\"csrftoken\" value=\"",
+        "\""
+    ],
+    "MatchStudentName": "<h4 class=\"media-heading\">(.*?)</h4>",
+    "ClearNoNeedStudentNameTag": [
+        "<h4 class=\"media-heading\">",
+        "</h4>"
+    ],
+    "MatchMajorAndClass": "<p>(.*?)</p>",
+    "ClearNoNeedMatchMajorAndClassTag": [
+        "<p>",
+        "</p>"
+    ],
+    "CourseReg":"//span[@class=\"title\"]",
+    "ScoreReg":"//span[@class=\"fraction float_r\"]"
+}

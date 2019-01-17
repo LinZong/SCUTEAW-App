@@ -1,0 +1,74 @@
+
+
+
+
+<h5 class="index_title"><span class="title">成绩</span></h5>
+
+	<div class="list-group">
+	
+	
+	 
+		<a onclick="clickMenu('N305005','/cjcx/cjcx_cxDgXscj.html','学生成绩查询'); return false;" target="_blank" class="list-group-item">
+			<span class="title">
+			2018-2019-1-通选课-新媒体文化
+			</span>
+			<span class="fraction float_r">80</span>
+		</a>
+    		
+	
+	 
+		<a onclick="clickMenu('N305005','/cjcx/cjcx_cxDgXscj.html','学生成绩查询'); return false;" target="_blank" class="list-group-item">
+			<span class="title">
+			2017-2018-2-必修课-军事理论
+			</span>
+			<span class="fraction float_r">72</span>
+		</a>
+    		
+	
+	 
+		<a onclick="clickMenu('N305005','/cjcx/cjcx_cxDgXscj.html','学生成绩查询'); return false;" target="_blank" class="list-group-item">
+			<span class="title">
+			2017-2018-2-必修课-高级语言程序设计(C++)(下)
+			</span>
+			<span class="fraction float_r">92</span>
+		</a>
+    		
+	
+	 
+		<a onclick="clickMenu('N305005','/cjcx/cjcx_cxDgXscj.html','学生成绩查询'); return false;" target="_blank" class="list-group-item">
+			<span class="title">
+			2017-2018-2-必修课-概率论与数理统计
+			</span>
+			<span class="fraction float_r">90</span>
+		</a>
+    		
+	
+	 
+		<a onclick="clickMenu('N305005','/cjcx/cjcx_cxDgXscj.html','学生成绩查询'); return false;" target="_blank" class="list-group-item">
+			<span class="title">
+			2017-2018-2-必修课-电路与电子技术
+			</span>
+			<span class="fraction float_r">90</span>
+		</a>
+    		
+	
+			
+	
+			
+	
+			
+	
+			
+	
+			
+	
+	
+	
+	
+	
+	<div>
+	    <a onclick="clickMenu('N305005','/cjcx/cjcx_cxDgXscj.html','学生成绩查询'); return false;" target="_blank"><p align="right" id="xscjcxgd">...更多</p></a>
+	</div>
+	
+	
+	</div>
