@@ -35,7 +35,7 @@ namespace SCUTEAW_App
         }
         public void LoadPersonalInfoPage()
         {
-            Dispatcher.Invoke(new Action(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 (string major, string name) = app.EduAdmInstance.ShowPersonalInfo();
                 personalInfo = new PersonalInfoModel();
