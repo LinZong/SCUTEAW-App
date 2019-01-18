@@ -72,7 +72,7 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Hyperlink NavigateUri="http://baidu.com" Click="ShowHowToUseCookie">How To Use?</Hyperlink>
+                        <Hyperlink NavigateUri="{Binding Source={x:Static props:Resources.CookieModeGuideUrl}}" Click="ShowHowToUseCookie">How To Use?</Hyperlink>
                     </TextBlock>
                     <Label Content="Student ID:" Grid.Row="1" Grid.Column="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Label Content="JSESSION:" Grid.Row="2" Grid.Column="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>

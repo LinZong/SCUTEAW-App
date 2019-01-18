@@ -61,6 +61,15 @@ namespace SCUTEAW_App.Properties {
         }
         
         /// <summary>
+        ///   查找类似 https://github.com/LinZong/SCUTEAW-App-Docs/blob/master/cookie-mode-login/cookie-mode-login.md 的本地化字符串。
+        /// </summary>
+        public static string CookieModeGuideUrl {
+            get {
+                return ResourceManager.GetString("CookieModeGuideUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Icon EnChan {
