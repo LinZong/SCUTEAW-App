@@ -30,8 +30,6 @@ namespace SCUTEAW_App
         {
             InitializeComponent();
             app = (Application.Current as App);
-            var proxyStr = Properties.Settings.Default.ProxyString;
-            app.EduAdmInstance = string.IsNullOrEmpty(proxyStr) ? new ScutEduAdm() : new ScutEduAdm(new EawRequest(new System.Net.WebProxy(proxyStr)));
         }
         private void LoginExit(object sender, RoutedEventArgs e)
         {
@@ -53,6 +51,10 @@ namespace SCUTEAW_App
 
             // Try to login.
             TriggleLoginButton();
+            app.EduAdmInstance = string.IsNullOrEmpty(Properties.Settings.Default.ProxyString) ? 
+                                    new ScutEduAdm() : 
+                                    new ScutEduAdm(new EawRequest(new System.Net.WebProxy(Properties.Settings.Default.ProxyString)));
+
             if (app.EduAdmInstance.LoginScutEduAdm(LoginType.UseStudentIdAndPassword, out string FailedResult, StuId, StuPasswd))
             {
                 // Jump to main window.
@@ -78,6 +80,9 @@ namespace SCUTEAW_App
             // Try to login.
 
             TriggleLoginButton();
+            app.EduAdmInstance = string.IsNullOrEmpty(Properties.Settings.Default.ProxyString) ?
+                                    new ScutEduAdm() :
+                                    new ScutEduAdm(new EawRequest(new System.Net.WebProxy(Properties.Settings.Default.ProxyString)));
             if (app.EduAdmInstance.LoginScutEduAdm(LoginType.UseCookie, out string FailedResult, StuId, Jsession, JwxtToken))
             {
                 MainWindow mwin = new MainWindow();

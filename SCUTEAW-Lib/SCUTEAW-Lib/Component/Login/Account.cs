@@ -27,30 +27,39 @@ namespace SCUTEAW_Lib.Component.Login
             UserAccount = new UserIdentifier { StudentId = studentId, Password = password };
             CookieMode = false;
 
-            (string mod, string expo, string csrf) = Request.GetLoginInfo(studentId, password);
-
-            int Exit = 999;
-            var EncryptPasswd = LoginHelper.EncryptPassword(mod, expo, password, out Exit);
-            var param = new List<KeyValuePair<string, string>>();
-            param.Add(new KeyValuePair<string, string>("csrftoken", csrf));
-            param.Add(new KeyValuePair<string, string>("yhm", studentId));
-            param.Add(new KeyValuePair<string, string>("mm", EncryptPasswd));
-            HttpStatusCode status;
-
-            var LoginStatus = Request.LoginToEduAdm(param, out status);
-            if (LoginStatus)
+            try
             {
-                FailedResult = null;
-                IsLoginIn = true;
-                return true;
+                (string mod, string expo, string csrf) = Request.GetLoginInfo(studentId, password);
+
+                int Exit = 999;
+                var EncryptPasswd = LoginHelper.EncryptPassword(mod, expo, password, out Exit);
+                var param = new List<KeyValuePair<string, string>>();
+                param.Add(new KeyValuePair<string, string>("csrftoken", csrf));
+                param.Add(new KeyValuePair<string, string>("yhm", studentId));
+                param.Add(new KeyValuePair<string, string>("mm", EncryptPasswd));
+                HttpStatusCode status;
+                var LoginStatus = Request.LoginToEduAdm(param, out status);
+
+                if (LoginStatus)
+                {
+                    FailedResult = null;
+                    IsLoginIn = true;
+                    return true;
+                }
+                else
+                {
+                    if (status == HttpStatusCode.RequestTimeout) FailedResult = "Request time out.";
+                    else FailedResult = "Username or password is wrong.";
+                }
+                IsLoginIn = false;
+                return false;
             }
-            else
+            catch (Exception e)
             {
-                if (status == HttpStatusCode.RequestTimeout) FailedResult = "Request time out.";
-                else FailedResult = "Username or password is wrong.";
+                FailedResult = e.Message;
+                IsLoginIn = false;
+                return false;
             }
-            IsLoginIn = false;
-            return false;
         }
         public bool LoginWithCookie(string studentId,string Jsession, string JwxtToken)
         {

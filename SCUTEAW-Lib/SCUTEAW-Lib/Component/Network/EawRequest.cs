@@ -7,6 +7,8 @@ using RestSharp;
 using SCUTEAW_Lib.Component.Network;
 using SCUTEAW_Lib.Component.Extractor;
 using System.Linq;
+using Newtonsoft.Json;
+using System;
 
 namespace SCUTEAW_Lib.Component.Network
 {
@@ -25,20 +27,28 @@ namespace SCUTEAW_Lib.Component.Network
             var FullPageRequest = new RestRequest(requestUrl.EAWLoginUrl, Method.GET);
             FullPageRequest.AddDecompressionMethod(DecompressionMethods.GZip);
             var FullPageResponse = client.Execute(FullPageRequest);
-            var FullPage = FullPageResponse.Content;
-
-            var CsrfToken = ContentExtractor.ExtractCsrfToken(FullPage);
-
-            var CombineUrl = requestUrl.GetPublicKeyUrl + LoginHelper.DateTimeNowUnix().ToString();
-
-            var LoginRsaPubKeyRequest = new RestRequest(CombineUrl, Method.GET);
-            LoginRsaPubKeyRequest.AddDecompressionMethod(DecompressionMethods.GZip);
-
-            var PublicKeyContent = client.Execute(LoginRsaPubKeyRequest).Content;
-            var PublicKeyObject = JObject.Parse(PublicKeyContent);
-            var Modulus = PublicKeyObject.GetValue("modulus").ToString();
-            var Exponent = PublicKeyObject.GetValue("exponent").ToString();
-            return (Modulus, Exponent, CsrfToken);
+            try
+            {
+                var FullPage = FullPageResponse.Content;
+                if (string.IsNullOrEmpty(FullPage)) throw new FormatException("Login page is empty.");
+                var CsrfToken = ContentExtractor.ExtractCsrfToken(FullPage);
+                var CombineUrl = requestUrl.GetPublicKeyUrl + LoginHelper.DateTimeNowUnix().ToString();
+                var LoginRsaPubKeyRequest = new RestRequest(CombineUrl, Method.GET);
+                LoginRsaPubKeyRequest.AddDecompressionMethod(DecompressionMethods.GZip);
+                var PublicKeyContent = client.Execute(LoginRsaPubKeyRequest).Content;
+                var PublicKeyObject = JObject.Parse(PublicKeyContent);
+                var Modulus = PublicKeyObject.GetValue("modulus").ToString();
+                var Exponent = PublicKeyObject.GetValue("exponent").ToString();
+                return (Modulus, Exponent, CsrfToken);
+            }
+            catch (JsonReaderException)
+            {
+                throw new FormatException("Cannot extract encrypt RSA public key.");
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
         public bool LoginToEduAdm(List<KeyValuePair<string, string>> Params,out HttpStatusCode status)
         {
@@ -82,15 +92,17 @@ namespace SCUTEAW_Lib.Component.Network
         public bool ValidateSessionCookie(string Jsession, string JwxtToken)
         {
             var session = new SessionIdentifier() { JSESSIONID = Jsession, BIGServerJwxtToken = JwxtToken };
-
             var CookieVerifyReq = new RestRequest(requestUrl.StudentHomepageUrl, Method.GET);
             CookieVerifyReq.AddDecompressionMethod(DecompressionMethods.GZip);
             var testClient = ClientFactory();
             testClient.Proxy = UsedProxy;
             testClient.AddAllCookies(session.ToCookies());
             var cont = testClient.Execute(CookieVerifyReq);
+
             if (cont.StatusCode == HttpStatusCode.OK)
             {
+                //把这个校验通过的Cookie给到主client。
+                client.AddAllCookies(session.ToCookies());
                 return true;
             }
             return false;

@@ -53,10 +53,12 @@ namespace SCUTEAW_Lib.Component.Network
         public static RestClient ClientFactory(WebProxy proxy = null)
         {
             var _client = new RestClient();
+            _client.Timeout = 5000;
             _client.FollowRedirects = false;
             _client.CookieContainer = new CookieContainer();
             _client.AddAllDefaultHeader(LoadPresetRequestHeader());
             _client.Proxy = proxy ?? new WebProxy();
+            if (requestUrl != null) _client.BaseUrl = new System.Uri(requestUrl.BaseUrl);
             return _client;
         }
 

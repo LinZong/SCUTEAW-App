@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SCUTEAW_App"
         mc:Ignorable="d"
-        Title="SCUT Educational Administration AutoMata" Height="600" Width="900">
+        Title="SCUT Educational Administration AutoMata" Height="700" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
