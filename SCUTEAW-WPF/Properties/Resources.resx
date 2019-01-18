@@ -130,6 +130,9 @@
   <data name="NeesJwxtToken" xml:space="preserve">
     <value>BIGipServerjwxtnew_BS80 shouldn't be empty.</value>
   </data>
+  <data name="ProxyMustBeUrl" xml:space="preserve">
+    <value>Proxy string must be url format.</value>
+  </data>
   <data name="StudentIdNeedNumber" xml:space="preserve">
     <value>Student Id should be number.</value>
   </data>

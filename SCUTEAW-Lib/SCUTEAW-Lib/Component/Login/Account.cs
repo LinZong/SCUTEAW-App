@@ -3,9 +3,7 @@ using SCUTEAW_Lib.Component.Network;
 using SCUTEAW_Lib.Model.Login;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace SCUTEAW_Lib.Component.Login
 {
@@ -13,18 +11,18 @@ namespace SCUTEAW_Lib.Component.Login
     {
         UseStudentIdAndPassword,UseCookie
     }
-    public class LoginEaw
+    public class Account
     {
         public bool CookieMode { get; private set; }
         public bool IsLoginIn { get; private set; }
         public UserIdentifier UserAccount { get; private set; }
 
         private readonly EawRequest Request;
-        public LoginEaw(EawRequest _req)
+        public Account(EawRequest _req)
         {
             Request = _req;
         }
-        public bool LoginWithAccount(string studentId, string password)
+        public bool LoginWithPassword(string studentId, string password,out string FailedResult)
         {
             UserAccount = new UserIdentifier { StudentId = studentId, Password = password };
             CookieMode = false;
@@ -37,26 +35,29 @@ namespace SCUTEAW_Lib.Component.Login
             param.Add(new KeyValuePair<string, string>("csrftoken", csrf));
             param.Add(new KeyValuePair<string, string>("yhm", studentId));
             param.Add(new KeyValuePair<string, string>("mm", EncryptPasswd));
-            if (Request.LoginToEduAdm(param))
+            HttpStatusCode status;
+
+            var LoginStatus = Request.LoginToEduAdm(param, out status);
+            if (LoginStatus)
             {
-                Console.WriteLine($" {studentId} -- Login Successful!");
+                FailedResult = null;
                 IsLoginIn = true;
                 return true;
             }
             else
             {
-                Console.WriteLine("Login failed. Username or password is wrong");
+                if (status == HttpStatusCode.RequestTimeout) FailedResult = "Request time out.";
+                else FailedResult = "Username or password is wrong.";
             }
             IsLoginIn = false;
             return false;
         }
         public bool LoginWithCookie(string studentId,string Jsession, string JwxtToken)
         {
-            UserAccount = new UserIdentifier { StudentId = studentId, Password = "" };
+            UserAccount = new UserIdentifier { StudentId = studentId, Password = null };
             var cookieStatus = Request.ValidateSessionCookie(Jsession, JwxtToken);
             if (cookieStatus)
             {
-                Console.WriteLine($"Cookie mode -- {studentId} -- Login Successful!");
                 CookieMode = true;
                 IsLoginIn = true;
                 return true;
@@ -69,6 +70,7 @@ namespace SCUTEAW_Lib.Component.Login
         {
             if (IsLoginIn && !CookieMode)
             {
+                IsLoginIn = false;
                 Request.LogoutEduAdm();
             }
         }

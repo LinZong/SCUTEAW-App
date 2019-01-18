@@ -7,7 +7,7 @@
         xmlns:validator="clr-namespace:SCUTEAW_App.DataValidator"
         xmlns:props="clr-namespace:SCUTEAW_App.Properties"
         mc:Ignorable="d"
-        Title="SCUT Education Administration AutoMata" Height="400" Width="500" ResizeMode="NoResize">
+        Title="SCUT Education Administration Login" Height="400" Width="500" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Style.Triggers>
@@ -51,7 +51,7 @@
                         </Binding>
                     </TextBox>
                     <PasswordBox Grid.Row="3" x:Name="Login_Passwd_Password" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="25" FontSize="14" VerticalContentAlignment="Center" />
-                    <Button Grid.Row="4" Grid.Column="2" Click="PasswordModeLogin" Content="Login" HorizontalAlignment="Right" Margin="0,0,15,0"  VerticalAlignment="Center" Height="25" Width="50"/>
+                    <Button x:Name="Passwd_Login_Button" Grid.Row="4" Grid.Column="2" Click="PasswordModeLogin" Content="Login" HorizontalAlignment="Right" Margin="0,0,15,0"  VerticalAlignment="Center" Height="25" Width="50"/>
                     <Button Grid.Row="4" Grid.Column="3" Content="Exit" Click="LoginExit" HorizontalAlignment="Left" Margin="15,0,0,0"  VerticalAlignment="Center" Height="25" Width="50"/>
                 </Grid>
             </TabItem>
@@ -78,28 +78,55 @@
                     <Label Content="JSESSION:" Grid.Row="2" Grid.Column="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Label Content="BIGJwxtToken:" Grid.Row="3" Grid.Column="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBox Grid.Row="1" Grid.Column="2" x:Name="Login_Token_StudentId" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="25" FontSize="14" VerticalContentAlignment="Center">
-                        <Binding RelativeSource="{RelativeSource Self}" Path="Text">
+                        <Binding RelativeSource="{RelativeSource Self}" Path="Text" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
                                 <validator:ValidateStudentId ValidatesOnTargetUpdated="True"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
                     <TextBox Grid.Row="2" Grid.Column="2" x:Name="Login_Token_JSESSION" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="25" FontSize="14" VerticalContentAlignment="Center">
-                        <Binding RelativeSource="{RelativeSource Self}" Path="Text">
+                        <Binding RelativeSource="{RelativeSource Self}" Path="Text" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
                                 <validator:ValidateCookies EmptyErrorMessage="{x:Static props:Resources.NeedJSESSION}" ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
                     <TextBox Grid.Row="3" Grid.Column="2" x:Name="Login_Token_JwxtToken" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="25" FontSize="14" VerticalContentAlignment="Center">
-                        <Binding RelativeSource="{RelativeSource Self}" Path="Text">
+                        <Binding RelativeSource="{RelativeSource Self}" Path="Text" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
                                 <validator:ValidateCookies EmptyErrorMessage="{x:Static props:Resources.NeesJwxtToken}" ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
-                    <Button Grid.Row="4" Grid.Column="2" Click="CookieModeLogin" Content="Login" HorizontalAlignment="Right" Margin="0,0,15,0"  VerticalAlignment="Center" Height="25" Width="50"/>
+                    <Button x:Name="Cookie_Login_Button" Grid.Row="4" Grid.Column="2" Click="CookieModeLogin" Content="Login" HorizontalAlignment="Right" Margin="0,0,15,0"  VerticalAlignment="Center" Height="25" Width="50"/>
                     <Button Grid.Row="4" Grid.Column="3" Content="Exit" Click="LoginExit" HorizontalAlignment="Left" Margin="15,0,0,0"  VerticalAlignment="Center" Height="25" Width="50"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ProxySetting">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="7.7*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Proxy String" Grid.Row="2" Grid.Column="0" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <TextBox x:Name="Login_ProxyStringBox" FontSize="14" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="200">
+                        <Binding Source="{x:Static props:Settings.Default}" Path="ProxyString" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validator:ValidateProxyString ValidatesOnTargetUpdated="True"></validator:ValidateProxyString>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                    <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Save" Height="25" Width="50" Click="SaveProxySetting"></Button>
+                        <Button Content="Exit" Click="LoginExit"  Margin="15,0,0,0" Height="25" Width="50"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

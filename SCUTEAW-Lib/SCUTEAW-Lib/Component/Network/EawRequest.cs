@@ -40,12 +40,13 @@ namespace SCUTEAW_Lib.Component.Network
             var Exponent = PublicKeyObject.GetValue("exponent").ToString();
             return (Modulus, Exponent, CsrfToken);
         }
-        public bool LoginToEduAdm(List<KeyValuePair<string, string>> Params)
+        public bool LoginToEduAdm(List<KeyValuePair<string, string>> Params,out HttpStatusCode status)
         {
             var LoginRequest = new RestRequest(requestUrl.EAWLoginUrl, Method.POST);
             LoginRequest.AddDecompressionMethod(DecompressionMethods.GZip);
             LoginRequest.AddAllParameters(Params);
             var response = client.Execute(LoginRequest);
+            status = response.StatusCode;
             if (response.StatusCode == HttpStatusCode.Redirect)
             {
                 var location = response.Headers.FirstOrDefault(x => x.Name == "Location" && x.Value.ToString() == requestUrl.StudentHomepageUrl);

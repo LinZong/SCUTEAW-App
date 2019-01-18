@@ -12,7 +12,7 @@ namespace SCUTEAW_Lib.Component.Login
 
         private EawRequest Request { get; set; }
 
-        private LoginEaw loginEaw { get; set; }
+        public Account account { get; private set; }
 
         public ScutEduAdm() : this(new EawRequest())
         {
@@ -21,7 +21,7 @@ namespace SCUTEAW_Lib.Component.Login
         public ScutEduAdm(EawRequest request)
         {
             Request = request;
-            loginEaw = new LoginEaw(Request);
+            account = new Account(Request);
         }
         /// <summary>
         /// 执行登陆教务请求
@@ -29,44 +29,43 @@ namespace SCUTEAW_Lib.Component.Login
         /// <param name="type">登陆模式, UseStudentIdAndPassword 和 UseCookie</param>
         /// <param name="args">登陆需要的参数 如果使用StudentIdAndPassword, 依次传入StudentId, Password。如果使用UseCookie, 依次传入StudentId, JSESSION, JwxtToken</param>
         /// <returns></returns>
-        public bool LoginScutEduAdm(LoginType type, params string[] args)
+        public bool LoginScutEduAdm(LoginType type,out string FailedResult, params string[] args)
         {
             switch (type)
             {
                 case LoginType.UseStudentIdAndPassword:
-                    return loginEaw.LoginWithAccount(args[0], args[1]);
+                    return account.LoginWithPassword(args[0], args[1], out FailedResult);
                 case LoginType.UseCookie:
-                    return loginEaw.LoginWithCookie(args[0], args[1], args[2]);
+                    FailedResult = "Cookie is invalid.";
+                    return account.LoginWithCookie(args[0], args[1], args[2]);
                 default:
+                    FailedResult = "Unknown failure.";
                     return false;
             }
         }
-        public void ShowPersonalInfo()
+        public (string major, string name) ShowPersonalInfo()
         {
             if (CheckLoginStatus())
             {
-                var rawInfo = Request.GetPersonalInfo(loginEaw.UserAccount.StudentId);
-                (string major, string name) = ContentExtractor.ExtractPersonalInfo(rawInfo);
-                Console.WriteLine($"{major} -- {name}");
+                var rawInfo = Request.GetPersonalInfo(account.UserAccount.StudentId);
+                return ContentExtractor.ExtractPersonalInfo(rawInfo);
             }
+            return (null,null);
         }
-        public void ShowRecentScore()
+        public List<KeyValuePair<string,string>> ShowRecentScore()
         {
             if (CheckLoginStatus())
             {
-                Console.WriteLine("Let's query your RECENT Score! ->_->");
-                var rawInfo = Request.GetRecentScoreInfo(loginEaw.UserAccount.StudentId);
+                var rawInfo = Request.GetRecentScoreInfo(account.UserAccount.StudentId);
                 var ScoreList = ContentExtractor.ExtractScore(rawInfo);
-                foreach (var i in ScoreList)
-                {
-                    Console.WriteLine($"  {i.Key}   {i.Value}  ");
-                }
+                return ScoreList;
             }
+            return null;
         }
-        public void LogoutScutEduAdm() => loginEaw.LogoutAccount();
+        public void LogoutScutEduAdm() => account.LogoutAccount();
         private bool CheckLoginStatus()
         {
-            return loginEaw.IsLoginIn;
+            return account.IsLoginIn;
         }
     }
 }

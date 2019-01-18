@@ -22,5 +22,17 @@ namespace SCUTEAW_App.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://127.0.0.1:9081")]
+        public string ProxyString {
+            get {
+                return ((string)(this["ProxyString"]));
+            }
+            set {
+                this["ProxyString"] = value;
+            }
+        }
     }
 }

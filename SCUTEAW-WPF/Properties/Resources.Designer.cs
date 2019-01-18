@@ -98,6 +98,15 @@ namespace SCUTEAW_App.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Proxy string must be url format. 的本地化字符串。
+        /// </summary>
+        public static string ProxyMustBeUrl {
+            get {
+                return ResourceManager.GetString("ProxyMustBeUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Student Id should be number. 的本地化字符串。
         /// </summary>
         public static string StudentIdNeedNumber {
