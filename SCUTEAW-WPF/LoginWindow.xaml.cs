@@ -51,9 +51,7 @@ namespace SCUTEAW_App
 
             // Try to login.
             TriggleLoginButton();
-            app.EduAdmInstance = string.IsNullOrEmpty(Properties.Settings.Default.ProxyString) ? 
-                                    new ScutEduAdm() : 
-                                    new ScutEduAdm(new EawRequest(new System.Net.WebProxy(Properties.Settings.Default.ProxyString)));
+            PrepareEduAdmInstance();
 
             if (app.EduAdmInstance.LoginScutEduAdm(LoginType.UseStudentIdAndPassword, out string FailedResult, StuId, StuPasswd))
             {
@@ -80,9 +78,7 @@ namespace SCUTEAW_App
             // Try to login.
 
             TriggleLoginButton();
-            app.EduAdmInstance = string.IsNullOrEmpty(Properties.Settings.Default.ProxyString) ?
-                                    new ScutEduAdm() :
-                                    new ScutEduAdm(new EawRequest(new System.Net.WebProxy(Properties.Settings.Default.ProxyString)));
+            PrepareEduAdmInstance();
             if (app.EduAdmInstance.LoginScutEduAdm(LoginType.UseCookie, out string FailedResult, StuId, Jsession, JwxtToken))
             {
                 MainWindow mwin = new MainWindow();
@@ -95,6 +91,19 @@ namespace SCUTEAW_App
             {
                 TriggleLoginButton();
                 MessageBox.Show(FailedResult, "登陆错误", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+        private void PrepareEduAdmInstance()
+        {
+            if (app.EduAdmInstance == null)
+            {
+                app.EduAdmInstance = string.IsNullOrEmpty(Properties.Settings.Default.ProxyString) ?
+                                    new ScutEduAdm() :
+                                    new ScutEduAdm(new EawRequest(new System.Net.WebProxy(Properties.Settings.Default.ProxyString)));
+            }
+            else
+            {
+                app.EduAdmInstance.SetProxy(new System.Net.WebProxy(Properties.Settings.Default.ProxyString));
             }
         }
         private void ShowHowToUseCookie(object sender, RoutedEventArgs e)

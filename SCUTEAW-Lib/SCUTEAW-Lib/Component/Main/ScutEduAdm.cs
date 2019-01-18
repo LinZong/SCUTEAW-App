@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using SCUTEAW_Lib.Component.Extractor;
 using SCUTEAW_Lib.Component.Helper;
@@ -14,6 +15,10 @@ namespace SCUTEAW_Lib.Component.Login
 
         public Account account { get; private set; }
 
+        public void SetProxy(WebProxy proxy)
+        {
+            if (Request != null) Request.client.Proxy = proxy;
+        }
         public ScutEduAdm() : this(new EawRequest())
         {
 
