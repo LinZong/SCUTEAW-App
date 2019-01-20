@@ -3,6 +3,7 @@ using SCUTEAW_Lib.Component.Network;
 using SCUTEAW_Lib.Model.Login;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace SCUTEAW_Lib.Component.Login
@@ -26,7 +27,6 @@ namespace SCUTEAW_Lib.Component.Login
         {
             UserAccount = new UserIdentifier { StudentId = studentId, Password = password };
             CookieMode = false;
-
             try
             {
                 (string mod, string expo, string csrf) = Request.GetLoginInfo(studentId, password);
@@ -37,20 +37,20 @@ namespace SCUTEAW_Lib.Component.Login
                 param.Add(new KeyValuePair<string, string>("csrftoken", csrf));
                 param.Add(new KeyValuePair<string, string>("yhm", studentId));
                 param.Add(new KeyValuePair<string, string>("mm", EncryptPasswd));
-                HttpStatusCode status;
-                var LoginStatus = Request.LoginToEduAdm(param, out status);
-
-                if (LoginStatus)
+                var response = Request.LoginToEduAdm(param);
+                if (response.StatusCode == HttpStatusCode.Redirect)
                 {
-                    FailedResult = null;
-                    IsLoginIn = true;
-                    return true;
-                }
-                else
-                {
-                    if (status == HttpStatusCode.RequestTimeout) FailedResult = "Request time out.";
+                    var location = response.Headers.FirstOrDefault(x => x.Name == "Location" && x.Value.ToString() == Requester.requestUrl.StudentHomepageUrl);
+                    if (location != null)
+                    {
+                        FailedResult = null;
+                        IsLoginIn = true;
+                        return true;
+                    }
                     else FailedResult = "Username or password is wrong.";
                 }
+                else FailedResult = "Request time out.";
+
                 IsLoginIn = false;
                 return false;
             }

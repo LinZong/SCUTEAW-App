@@ -1,9 +1,9 @@
 {
     "BaseUrl":"http://xsjw2018.scuteo.com",
-    "EAWLoginUrl":"/xtgl/login_slogin.html",
-    "StudentHomepageUrl":"/xtgl/index_initMenu.html",
-    "GetPublicKeyUrl":"/xtgl/login_getPublicKey.html?time=",
-    "LogoutUrl":"/logout?t={0}&login_type=",
-    "GetPersonalInfoUrl":"/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={0}&gnmkdm=index&su={1}",
-    "GetRecentScoreUrl":"/xtgl/index_cxAreaFour.html?localeKey=zh_CN&gnmkdm=index&su={0}"
+    "EAWLoginUrl":"/jwglxt/xtgl/login_slogin.html",
+    "StudentHomepageUrl":"/jwglxt/xtgl/index_initMenu.html",
+    "GetPublicKeyUrl":"/jwglxt/xtgl/login_getPublicKey.html?time=",
+    "LogoutUrl":"/jwglxt/logout?t={0}&login_type=",
+    "GetPersonalInfoUrl":"/jwglxt/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={0}&gnmkdm=index&su={1}",
+    "GetRecentScoreUrl":"/jwglxt/xtgl/index_cxAreaFour.html?localeKey=zh_CN&gnmkdm=index&su={0}"
 }

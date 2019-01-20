@@ -50,22 +50,14 @@ namespace SCUTEAW_Lib.Component.Network
                 throw e;
             }
         }
-        public bool LoginToEduAdm(List<KeyValuePair<string, string>> Params,out HttpStatusCode status)
+        public IRestResponse LoginToEduAdm(List<KeyValuePair<string, string>> Params)
         {
             var LoginRequest = new RestRequest(requestUrl.EAWLoginUrl, Method.POST);
             LoginRequest.AddDecompressionMethod(DecompressionMethods.GZip);
             LoginRequest.AddAllParameters(Params);
             var response = client.Execute(LoginRequest);
-            status = response.StatusCode;
-            if (response.StatusCode == HttpStatusCode.Redirect)
-            {
-                var location = response.Headers.FirstOrDefault(x => x.Name == "Location" && x.Value.ToString() == requestUrl.StudentHomepageUrl);
-                if (location != null)
-                {
-                     return true;
-                }
-            }
-            return false;
+
+            return response;
         }
 
         public string GetPersonalInfo(string StuId)
