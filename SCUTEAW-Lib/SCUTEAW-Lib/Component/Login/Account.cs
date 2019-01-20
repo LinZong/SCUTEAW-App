@@ -40,7 +40,7 @@ namespace SCUTEAW_Lib.Component.Login
                 var response = Request.LoginToEduAdm(param);
                 if (response.StatusCode == HttpStatusCode.Redirect)
                 {
-                    var location = response.Headers.FirstOrDefault(x => x.Name == "Location" && x.Value.ToString() == Requester.requestUrl.StudentHomepageUrl);
+                    var location = response.Headers.FirstOrDefault(x => x.Name == "Location" && x.Value.ToString().Contains(Requester.requestUrl.StudentHomepageUrl));
                     if (location != null)
                     {
                         FailedResult = null;

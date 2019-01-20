@@ -18,6 +18,9 @@
                 <TextBlock Text="{Binding Score}" Grid.Column="1" HorizontalAlignment="Center" FontSize="14"></TextBlock>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="RecentCourseItemTemplate">
+            <TextBlock TextWrapping="Wrap" Text="{Binding}" FontSize="14"></TextBlock>
+        </DataTemplate>
         <DataTemplate x:Key="PersonalInfoTemplate">
             <Grid Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
@@ -25,7 +28,7 @@
                     <ColumnDefinition Width="7*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Column="0" VerticalAlignment="Center">
-                    <Border BorderBrush="Gray" BorderThickness="1" Width="{Binding ElementName=PersonAvatarImage, Path=Width, Mode=OneWay}" Height="{Binding ElementName=PersonAvatarImage, Path=Height, Mode=OneWay}">
+                    <Border Width="{Binding ElementName=PersonAvatarImage, Path=Width, Mode=OneWay}" Height="{Binding ElementName=PersonAvatarImage, Path=Height, Mode=OneWay}">
                         <Image x:Name="PersonAvatarImage" Source="Resources/Icon/user_logo.jpg" />
                     </Border>
                 </WrapPanel>
@@ -108,11 +111,8 @@
         </GroupBox>
         <GroupBox Style="{StaticResource GroupBoxStyle1}" Grid.Row="1" Grid.Column="0" Header="最近课表">
             <Grid Margin="5,5,5,5">
-                <StackPanel>
-                    <ListBox BorderBrush="White">
-                        <Label>没有课程</Label>
-                    </ListBox>
-                </StackPanel>
+                <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"  BorderBrush="White" x:Name="RecentCourseListBox" ItemTemplate="{StaticResource RecentCourseItemTemplate}">
+                </ListBox>
             </Grid>
         </GroupBox>
     </Grid>

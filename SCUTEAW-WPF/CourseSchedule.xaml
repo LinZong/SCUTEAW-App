@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="SCUTEAW_App.CourseSchedule"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SCUTEAW_App"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1100"
+      Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9.2*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Gray" BorderThickness="2" Margin="5,5,5,5">
+            <Grid x:Name="CourseScheduleFrameworkGrid" Grid.Row="0" Margin="5,5,5,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.28*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.28*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.28*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.28*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.28*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.28*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.28*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!--把这个改写成Template-->
+                <Label Content="时间段" Grid.Row="0" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="节次" Grid.Row="0" Grid.Column="1" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="星期一" Grid.Row="0" Grid.Column="2" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="星期二" Grid.Row="0" Grid.Column="3" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="星期三" Grid.Row="0" Grid.Column="4" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="星期四" Grid.Row="0" Grid.Column="5" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="星期五" Grid.Row="0" Grid.Column="6" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="星期六" Grid.Row="0" Grid.Column="7" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="星期日" Grid.Row="0" Grid.Column="8" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="上午" Grid.Row="1" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="下午" Grid.Row="2" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Content="晚上" Grid.Row="3" Grid.Column="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Grid x:Name="ClassSectionGrid" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Content="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="2" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="3" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="4" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="5" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="6" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="7" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="8" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="9" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="10" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="11" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                    <Label Content="12" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
+                </Grid>
+                <!--<Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" ShowGridLines="True">
+
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="4" Grid.RowSpan="3" ShowGridLines="True">
+
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="5" Grid.RowSpan="3" ShowGridLines="True">
+
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="6" Grid.RowSpan="3" ShowGridLines="True">
+
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="7" Grid.RowSpan="3" ShowGridLines="True">
+
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="8" Grid.RowSpan="3" ShowGridLines="True">
+
+                </Grid>-->
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1" Margin="5,5,5,0">
+
+        </Grid>
+    </Grid>
+</UserControl>

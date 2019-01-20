@@ -78,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CourseSchedule.xaml.cs">
+      <DependentUpon>CourseSchedule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataValidator\SettingsValidator.cs" />
     <Compile Include="Model\PersonalInfoModel.cs" />
     <Compile Include="PersonalInfo.xaml.cs">
@@ -89,6 +92,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Page Include="CourseSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

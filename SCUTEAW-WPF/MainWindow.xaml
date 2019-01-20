@@ -30,7 +30,9 @@
                 </Grid>
             </TabItem>
             <TabItem Header="成绩查询"></TabItem>
-            <TabItem Header="课表查询"></TabItem>
+            <TabItem Header="课表查询">
+                <local:CourseSchedule></local:CourseSchedule>
+            </TabItem>
             <TabItem Header="自主选课"></TabItem>
         </TabControl>
     </Grid>

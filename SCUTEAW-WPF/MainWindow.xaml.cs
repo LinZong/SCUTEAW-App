@@ -24,7 +24,7 @@ namespace SCUTEAW_App
         {
             InitializeComponent();
             app = (Application.Current as App);
-            Closing += ClosingMainWindow;
+            if(!app.IsInOfflineMode) Closing += ClosingMainWindow;
         }
 
         private void ClosingMainWindow(object sender, System.ComponentModel.CancelEventArgs e)

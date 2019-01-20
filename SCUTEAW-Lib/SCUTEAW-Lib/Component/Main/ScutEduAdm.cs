@@ -62,8 +62,18 @@ namespace SCUTEAW_Lib.Component.Login
             if (CheckLoginStatus())
             {
                 var rawInfo = Request.GetRecentScoreInfo(account.UserAccount.StudentId);
-                var ScoreList = ContentExtractor.ExtractScore(rawInfo);
+                var ScoreList = ContentExtractor.ExtractRecentScore(rawInfo);
                 return ScoreList;
+            }
+            return null;
+        }
+        public List<string> ShowRecentCourses()
+        {
+            if(CheckLoginStatus())
+            {
+                var rawInfo = Request.GetRecentCourseInfo(account.UserAccount.StudentId);
+                var CourseList = ContentExtractor.ExtractRecentCourse(rawInfo);
+                return CourseList;
             }
             return null;
         }

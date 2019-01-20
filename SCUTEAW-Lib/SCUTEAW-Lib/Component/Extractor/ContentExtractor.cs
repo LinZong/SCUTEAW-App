@@ -48,7 +48,7 @@ namespace SCUTEAW_Lib.Component.Extractor
             }
             return (major,name);
         }
-        public static List<KeyValuePair<string,string>> ExtractScore(string rawString)
+        public static List<KeyValuePair<string,string>> ExtractRecentScore(string rawString)
         {
             var list = new List<KeyValuePair<string, string>>();
             var DOMParser = new HtmlDocument();
@@ -61,6 +61,14 @@ namespace SCUTEAW_Lib.Component.Extractor
                 list.Add(new KeyValuePair<string, string>(CourseNode[i].InnerText.Trim(), ScoreNode[i].InnerText));
             }
             return list;
+        }
+        public static List<string> ExtractRecentCourse(string rawString)
+        {
+            var parser = new HtmlDocument();
+            parser.LoadHtml(rawString);
+            var CourseNodes = parser.DocumentNode.SelectNodes(Extractor.CourseReg);
+            CourseNodes.RemoveAt(0);
+            return CourseNodes.Select(x => x.InnerText.Trim()).ToList();
         }
     }
 }

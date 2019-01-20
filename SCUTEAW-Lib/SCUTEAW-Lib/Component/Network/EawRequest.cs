@@ -62,14 +62,23 @@ namespace SCUTEAW_Lib.Component.Network
 
         public string GetPersonalInfo(string StuId)
         {
-            var PersonalInfoReq = new RestRequest(string.Format(requestUrl.GetPersonalInfoUrl, LoginHelper.DateTimeNowUnix(), StuId),Method.GET);
-            var Resp = client.Execute(PersonalInfoReq).Content;
-            return Resp;
+            var resp = ExecuteGetRequest(requestUrl.GetPersonalInfoUrl, LoginHelper.DateTimeNowUnix().ToString(),StuId);
+            return resp.Content;
         }
         public string GetRecentScoreInfo(string StuId)
         {
-            var PersonalInfoReq = new RestRequest(string.Format(requestUrl.GetRecentScoreUrl, StuId), Method.GET);
-            var Resp = client.Execute(PersonalInfoReq).Content;
+            var resp = ExecuteGetRequest(requestUrl.GetRecentScoreUrl, StuId);
+            return resp.Content;
+        }
+        public string GetRecentCourseInfo(string StuId)
+        {
+            var resp = ExecuteGetRequest(requestUrl.GetRecentCourseUrl, StuId);
+            return resp.Content;
+        }
+        public IRestResponse ExecuteGetRequest(string Url,params string[] paramArgs)
+        {
+            var PersonalInfoReq = new RestRequest(string.Format(Url, paramArgs), Method.GET);
+            var Resp = client.Execute(PersonalInfoReq);
             return Resp;
         }
         public void LogoutEduAdm()

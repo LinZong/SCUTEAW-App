@@ -31,7 +31,7 @@ namespace SCUTEAW_App
         {
             InitializeComponent();
             app = (Application.Current as App);
-            LoadPersonalInfoPage();
+            if (!app.IsInOfflineMode) LoadPersonalInfoPage();
         }
         public void LoadPersonalInfoPage()
         {
@@ -45,7 +45,7 @@ namespace SCUTEAW_App
                 personalInfo.LoginMode = "登录模式 : " + (app.EduAdmInstance.account.CookieMode ? "Cookie" : "Password");
 
                 PersonalInfoControl.Content = personalInfo;
-            }),null);
+            }), null);
 
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -53,9 +53,14 @@ namespace SCUTEAW_App
                 if (Scores.Count > 0)
                     ScoreList = Scores.Select(x => new CourseScore() { CourseName = x.Key, Score = int.Parse(x.Value) }).ToList();
                 else ScoreList = new List<CourseScore>();
-
                 RecentScoreListBox.ItemsSource = ScoreList;
-            }),null);
+            }), null);
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                var CourseList = app.EduAdmInstance.ShowRecentCourses();
+                if (CourseList.Count > 0)
+                    RecentCourseListBox.ItemsSource = CourseList;
+            }), null);
         }
     }
 }
