@@ -27,6 +27,7 @@ namespace SCUTEAW_App
         public List<CourseScore> ScoreList { get; set; }
         public PersonalInfoModel personalInfo { get; set; }
         public List<string> RecentCourse { get; set; }
+        public bool HideScore = false;
         public PersonalInfo()
         {
             InitializeComponent();
@@ -61,6 +62,26 @@ namespace SCUTEAW_App
                 if (CourseList.Count > 0)
                     RecentCourseListBox.ItemsSource = CourseList;
             }), null);
+        }
+
+        private void TriggleScoreHide(object sender, RoutedEventArgs e)
+        {
+            HideScore = !HideScore;
+            if(HideScore)
+            {
+                RecentScoreListBox.ItemTemplate = Resources["RecentScoreItemTemplateHideScore"] as DataTemplate;
+                RecentScoreListBox.UpdateDefaultStyle();
+                RecentScoreListBox.UpdateLayout();
+                (sender as Button).Content = "显示成绩";
+
+            }
+            else
+            {
+                RecentScoreListBox.ItemTemplate = Resources["RecentScoreItemTemplate"] as DataTemplate;
+                RecentScoreListBox.UpdateDefaultStyle();
+                RecentScoreListBox.UpdateLayout();
+                (sender as Button).Content = "隐藏成绩";
+            }
         }
     }
 }

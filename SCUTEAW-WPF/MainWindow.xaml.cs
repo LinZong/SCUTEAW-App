@@ -24,7 +24,10 @@ namespace SCUTEAW_App
         {
             InitializeComponent();
             app = (Application.Current as App);
-            if(!app.IsInOfflineMode) Closing += ClosingMainWindow;
+            if(!app.IsInOfflineMode)
+            {
+                Closing += ClosingMainWindow;
+            }
         }
 
         private void ClosingMainWindow(object sender, System.ComponentModel.CancelEventArgs e)
@@ -41,6 +44,15 @@ namespace SCUTEAW_App
         private void Close_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
            e.CanExecute = true;
+        }
+
+        private void LogoutHandler(object sender, RoutedEventArgs e)
+        {
+            app.EduAdmInstance?.LogoutScutEduAdm();
+            LoginWindow mwin = new LoginWindow();
+            Application.Current.MainWindow = mwin;
+            Close();
+            mwin.Show();
         }
     }
 }

@@ -103,8 +103,9 @@ namespace SCUTEAW_App
             }
             else
             {
-                if(!string.IsNullOrEmpty(Properties.Settings.Default.ProxyString))
+                if (!string.IsNullOrEmpty(Properties.Settings.Default.ProxyString))
                     app.EduAdmInstance.SetProxy(new System.Net.WebProxy(Properties.Settings.Default.ProxyString));
+                else app.EduAdmInstance.SetProxy(new System.Net.WebProxy());
             }
         }
         private void ShowHowToUseCookie(object sender, RoutedEventArgs e)

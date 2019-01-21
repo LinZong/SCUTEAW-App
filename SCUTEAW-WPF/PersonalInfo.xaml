@@ -18,6 +18,16 @@
                 <TextBlock Text="{Binding Score}" Grid.Column="1" HorizontalAlignment="Center" FontSize="14"></TextBlock>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="RecentScoreItemTemplateHideScore">
+            <Grid MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType={x:Type ListBoxItem} },Path=ActualWidth }">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextTrimming="WordEllipsis" Text="{Binding CourseName}" Grid.Column="0" FontSize="14"></TextBlock>
+                <TextBlock Text="**" Grid.Column="1" HorizontalAlignment="Center" FontSize="14"></TextBlock>
+            </Grid>
+        </DataTemplate>
         <DataTemplate x:Key="RecentCourseItemTemplate">
             <TextBlock TextWrapping="Wrap" Text="{Binding}" FontSize="14"></TextBlock>
         </DataTemplate>
@@ -100,7 +110,7 @@
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <Label>最近成绩</Label>
-                    <Button>隐藏成绩</Button>
+                    <Button Click="TriggleScoreHide">隐藏成绩</Button>
                 </StackPanel>
             </GroupBox.Header>
             <Grid Margin="5,5,5,5">

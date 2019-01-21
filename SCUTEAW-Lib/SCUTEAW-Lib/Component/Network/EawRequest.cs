@@ -75,6 +75,25 @@ namespace SCUTEAW_Lib.Component.Network
             var res = client.Execute(req);
             return res.Content;
         }
+
+        public string GetScoreListJson(string Year, string Term)
+        {
+            string ReqTerm = ScutEduAdm.TransformTermIndices(Term);
+
+            var req = new RestRequest(requestUrl.GetScoreJsonUrl, Method.POST);
+            req.AddParameter(new Parameter("xnm", Year, ParameterType.QueryString));
+            req.AddParameter(new Parameter("xqm", ReqTerm, ParameterType.QueryString));
+            //add some required request parameter.
+            req.AddParameter(new Parameter("_search",false, ParameterType.QueryString));
+            req.AddParameter(new Parameter("nd", LoginHelper.DateTimeNowUnix().ToString(), ParameterType.QueryString));
+            req.AddParameter(new Parameter("queryModel.showCount", 999, ParameterType.QueryString));
+            req.AddParameter(new Parameter("queryModel.currentPage", "1", ParameterType.QueryString));
+            req.AddParameter(new Parameter("queryModel.sortOrder", "asc", ParameterType.QueryString));
+            req.AddParameter(new Parameter("time", "1", ParameterType.QueryString));
+
+            var res = client.Execute(req);
+            return res.Content;
+        }
         public string GetPersonalInfo(string StuId)
         {
             var resp = ExecuteGetRequest(requestUrl.GetPersonalInfoUrl, LoginHelper.DateTimeNowUnix().ToString(),StuId);

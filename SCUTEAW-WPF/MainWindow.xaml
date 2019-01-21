@@ -17,7 +17,7 @@
                 <MenuItem Header="Exit" Command="Close"></MenuItem>
             </MenuItem>
             <MenuItem Header="Account">
-                <MenuItem Header="Logout"></MenuItem>
+                <MenuItem Header="Logout" Click="LogoutHandler"></MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About"></MenuItem>
@@ -29,7 +29,9 @@
                     <local:PersonalInfo/>
                 </Grid>
             </TabItem>
-            <TabItem Header="成绩查询"></TabItem>
+            <TabItem Header="成绩查询">
+                <local:ScoreQuery></local:ScoreQuery>
+            </TabItem>
             <TabItem Header="课表查询">
                 <local:CourseSchedule></local:CourseSchedule>
             </TabItem>

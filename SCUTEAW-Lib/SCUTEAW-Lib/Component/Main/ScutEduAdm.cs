@@ -96,6 +96,13 @@ namespace SCUTEAW_Lib.Component.Login
 
             throw new Exception("Account isn't Logined.");
         }
+
+        public string GetScoreListJson(string year, string term)
+        {
+            if (CheckLoginStatus())
+                return Request.GetScoreListJson(year, term);
+            throw new Exception("Account isn't Logined.");
+        }
         public void LogoutScutEduAdm() => account.LogoutAccount();
         private bool CheckLoginStatus()
         {

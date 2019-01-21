@@ -87,6 +87,7 @@
     <Compile Include="DataValidator\SettingsValidator.cs" />
     <Compile Include="Model\CourseItemModel.cs" />
     <Compile Include="Model\PersonalInfoModel.cs" />
+    <Compile Include="Model\ScoreItemModel.cs" />
     <Compile Include="PersonalInfo.xaml.cs">
       <DependentUpon>PersonalInfo.xaml</DependentUpon>
     </Compile>
@@ -94,6 +95,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ScoreQuery.xaml.cs">
+      <DependentUpon>ScoreQuery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Page Include="CourseSchedule.xaml">
@@ -118,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PersonalInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScoreQuery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

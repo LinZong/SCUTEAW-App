@@ -31,13 +31,7 @@ namespace SCUTEAW_App
             app = (Application.Current as App);
             InitializeComponent();
             LoadCourseScheduleFramework();
-
-            using (var sr = new StreamReader("AllCourse.json", Encoding.UTF8))
-            {
-                var str = sr.ReadToEnd();
-                LoadCourseScheduleTable(str);
-            }
-            //LoadQueryComboBoxContent();
+            LoadQueryComboBoxContent();
         }
         public void LoadQueryComboBoxContent()
         {
