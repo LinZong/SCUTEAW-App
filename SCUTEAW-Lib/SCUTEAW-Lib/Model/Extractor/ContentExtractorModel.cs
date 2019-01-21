@@ -16,5 +16,7 @@ namespace SCUTEAW_Lib.Model.Extractor
         public string[] ClearNoNeedMatchMajorAndClassTag { get; set; }
         public string CourseReg { get; set; }
         public string ScoreReg { get; set; }
+        public string QueryableYearReg { get; set; }
+        public string QueryableTermReg { get; set; }
     }
 }

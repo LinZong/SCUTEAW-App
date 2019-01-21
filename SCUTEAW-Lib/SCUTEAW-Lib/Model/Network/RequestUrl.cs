@@ -10,6 +10,8 @@
         public string GetPersonalInfoUrl { get; set; }
         public string GetRecentScoreUrl { get; set; }
         public string GetRecentCourseUrl { get; set; }
+        public string GetCourseScheduleJsonUrl { get; set; }
+        public string GetCourseSchedulePageUrl { get; set; }
 
     }
 }

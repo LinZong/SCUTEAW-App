@@ -9,6 +9,7 @@ using SCUTEAW_Lib.Component.Extractor;
 using System.Linq;
 using Newtonsoft.Json;
 using System;
+using SCUTEAW_Lib.Component.Login;
 
 namespace SCUTEAW_Lib.Component.Network
 {
@@ -59,7 +60,21 @@ namespace SCUTEAW_Lib.Component.Network
 
             return response;
         }
+        public string GetQueryableCourseTermYear(string StuId)
+        {
+            var resp = ExecuteGetRequest(requestUrl.GetCourseSchedulePageUrl, StuId);
+            return resp.Content;
+        }
+        public string GetCourseScheduleJson(string Year,string Term)
+        {
+            string ReqTerm = ScutEduAdm.TransformTermIndices(Term);
 
+            var req = new RestRequest(requestUrl.GetCourseScheduleJsonUrl, Method.POST);
+            req.AddParameter(new Parameter("xnm", Year,ParameterType.QueryString));
+            req.AddParameter(new Parameter("xqm", ReqTerm, ParameterType.QueryString));
+            var res = client.Execute(req);
+            return res.Content;
+        }
         public string GetPersonalInfo(string StuId)
         {
             var resp = ExecuteGetRequest(requestUrl.GetPersonalInfoUrl, LoginHelper.DateTimeNowUnix().ToString(),StuId);

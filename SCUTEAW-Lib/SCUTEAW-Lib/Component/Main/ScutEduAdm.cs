@@ -34,7 +34,7 @@ namespace SCUTEAW_Lib.Component.Login
         /// <param name="type">登陆模式, UseStudentIdAndPassword 和 UseCookie</param>
         /// <param name="args">登陆需要的参数 如果使用StudentIdAndPassword, 依次传入StudentId, Password。如果使用UseCookie, 依次传入StudentId, JSESSION, JwxtToken</param>
         /// <returns></returns>
-        public bool LoginScutEduAdm(LoginType type,out string FailedResult, params string[] args)
+        public bool LoginScutEduAdm(LoginType type, out string FailedResult, params string[] args)
         {
             switch (type)
             {
@@ -55,32 +55,69 @@ namespace SCUTEAW_Lib.Component.Login
                 var rawInfo = Request.GetPersonalInfo(account.UserAccount.StudentId);
                 return ContentExtractor.ExtractPersonalInfo(rawInfo);
             }
-            return (null,null);
+            throw new Exception("Account isn't Logined.");
         }
-        public List<KeyValuePair<string,string>> ShowRecentScore()
+        public List<KeyValuePair<string, string>> ShowRecentScore()
         {
+
             if (CheckLoginStatus())
             {
                 var rawInfo = Request.GetRecentScoreInfo(account.UserAccount.StudentId);
                 var ScoreList = ContentExtractor.ExtractRecentScore(rawInfo);
                 return ScoreList;
             }
-            return null;
+            throw new Exception("Account isn't Logined.");
         }
         public List<string> ShowRecentCourses()
         {
-            if(CheckLoginStatus())
+            if (CheckLoginStatus())
             {
                 var rawInfo = Request.GetRecentCourseInfo(account.UserAccount.StudentId);
                 var CourseList = ContentExtractor.ExtractRecentCourse(rawInfo);
                 return CourseList;
             }
-            return null;
+            throw new Exception("Account isn't Logined.");
+        }
+        public (List<string> SelectableYear, List<string> SelectableTerm, string SelectedYear, string SelectedTerm)
+                                 GetQueryCourseScheduleInfo()
+        {
+
+            if (CheckLoginStatus())
+            {
+                var rawInfo = Request.GetQueryableCourseTermYear(account.UserAccount.StudentId);
+                return ContentExtractor.ExtractQueryCourseScheduleParam(rawInfo);
+            }
+            throw new Exception("Account isn't Logined.");
+        }
+        public string GetCourseScheduleJson(string year,string term)
+        {
+            if (CheckLoginStatus())
+                return Request.GetCourseScheduleJson(year, term);
+
+            throw new Exception("Account isn't Logined.");
         }
         public void LogoutScutEduAdm() => account.LogoutAccount();
         private bool CheckLoginStatus()
         {
             return account.IsLoginIn;
+        }
+
+
+        public static string TransformTermIndices(string original)
+        {
+            string ReqTerm;
+            switch (original)
+            {
+                case "1":
+                    ReqTerm = "3"; break;
+                case "2":
+                    ReqTerm = "12"; break;
+                case "3":
+                    ReqTerm = "16"; break;
+                default:
+                    ReqTerm = original; break;
+            }
+            return ReqTerm;
         }
     }
 }

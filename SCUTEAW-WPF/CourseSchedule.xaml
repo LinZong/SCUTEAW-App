@@ -7,13 +7,57 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1100"
       Background="White">
+    <UserControl.Resources>
+        <DataTemplate x:Key="CourseItemTemplate">
+            <ScrollViewer IsManipulationEnabled="True" PanningMode="VerticalOnly" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Margin="2,2,2,2">
+                <ListBox IsEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="BorderThickness" Value="0"></Setter>
+                        </Style>
+                    </ListBox.Style>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Foreground="{Binding ItemColor}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="16" Text="{Binding CourseName}"></TextBlock>
+                                <StackPanel Margin="10,0,0,0">
+                                    <TextBlock Foreground="{Binding ItemColor}" TextWrapping="Wrap" FontSize="13" Text="{Binding HaveCourseRoomAndTeacher}"></TextBlock>
+                                    <TextBlock Foreground="{Binding ItemColor}" TextWrapping="Wrap" FontSize="13" Text="{Binding HaveCourseWeek}"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9.2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="8.2*"></RowDefinition>
             <RowDefinition Height="0.8*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border BorderBrush="Gray" BorderThickness="2" Margin="5,5,5,5">
-            <Grid x:Name="CourseScheduleFrameworkGrid" Grid.Row="0" Margin="5,5,5,5">
+        <Grid Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="QueryTermYear" Grid.Column="0" Width="180" Height="25" />
+                <ComboBox x:Name="QueryTermSeason" Grid.Column="1" Width="180" Height="25"></ComboBox>
+                <Button x:Name="PerformCourseScheduleQuery" Click="QuerySchedule" Grid.Column="2" Height="25" Width="70">查询</Button>
+            </Grid>
+        </Grid>
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="2" Margin="5,5,5,5">
+            <Grid x:Name="CourseScheduleFrameworkGrid"  Margin="5,5,5,5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="3*"></RowDefinition>
@@ -72,7 +116,7 @@
                     <Label Content="11" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
                     <Label Content="12" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></Label>
                 </Grid>
-                <!--<Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" ShowGridLines="True">
+                <!--<Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" ShowGridLines="False">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -80,12 +124,7 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+
                     </Grid.RowDefinitions>
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" ShowGridLines="True">
@@ -108,7 +147,7 @@
                 </Grid>-->
             </Grid>
         </Border>
-        <Grid Grid.Row="1" Margin="5,5,5,0">
+        <Grid Grid.Row="2" Margin="5,5,5,0">
 
         </Grid>
     </Grid>

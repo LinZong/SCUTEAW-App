@@ -96,7 +96,13 @@
         <GroupBox Style="{StaticResource GroupBoxStyle1}" Grid.Row="0" Grid.Column="0" Header="个人信息">
             <UserControl x:Name="PersonalInfoControl" ContentTemplate="{StaticResource PersonalInfoTemplate}"></UserControl>
         </GroupBox>
-        <GroupBox Style="{StaticResource GroupBoxStyle1}" Grid.Row="0" Grid.Column="1" Header="最近成绩">
+        <GroupBox Style="{StaticResource GroupBoxStyle1}" Grid.Row="0" Grid.Column="1">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Label>最近成绩</Label>
+                    <Button>隐藏成绩</Button>
+                </StackPanel>
+            </GroupBox.Header>
             <Grid Margin="5,5,5,5">
                 <StackPanel>
                     <ListBox ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="RecentScoreListBox" ItemTemplate="{StaticResource RecentScoreItemTemplate}" BorderBrush="White">

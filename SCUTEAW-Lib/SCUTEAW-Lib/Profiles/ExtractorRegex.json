@@ -15,5 +15,7 @@
         "</p>"
     ],
     "CourseReg":"//span[@class=\"title\"]",
-    "ScoreReg":"//span[@class=\"fraction float_r\"]"
+    "ScoreReg":"//span[@class=\"fraction float_r\"]",
+    "QueryableYearReg":"//select[@id=\"xnm1\"]/option",
+    "QueryableTermReg":"//select[@id=\"xqm1\"]/option"
 }

@@ -17,6 +17,6 @@ namespace SCUTEAW_App
     {
         //define some global variables here.
         public ScutEduAdm EduAdmInstance { get; set; }
-        public bool IsInOfflineMode = true;
+        public bool IsInOfflineMode = false;
     }
 }

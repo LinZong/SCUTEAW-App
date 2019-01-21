@@ -70,5 +70,21 @@ namespace SCUTEAW_Lib.Component.Extractor
             CourseNodes.RemoveAt(0);
             return CourseNodes.Select(x => x.InnerText.Trim()).ToList();
         }
+        public static (List<string> SelectableYear,List<string> SelectableTerm,string SelectedYear,string SelectedTerm) 
+                        ExtractQueryCourseScheduleParam(string rawString)
+        {
+            var parser = new HtmlDocument();
+            parser.LoadHtml(rawString);
+            var YearNode = parser.DocumentNode.SelectNodes(Extractor.QueryableYearReg);
+            var Selectedyear = YearNode.FirstOrDefault(x => x.GetAttributeValue("selected", "") == "selected")?.GetAttributeValue("value", null);
+            YearNode.RemoveAt(0);
+            List<string> YearList = YearNode.Select(x => x.InnerText.Trim()).ToList();
+            parser.LoadHtml(rawString);
+            var TernNode = parser.DocumentNode.SelectNodes(Extractor.QueryableTermReg);
+            var SelectedTerm = TernNode.FirstOrDefault(x => x.GetAttributeValue("selected", "") == "selected")?.GetAttributeValue("value", null);
+            TernNode.RemoveAt(0);
+            List<string> TermList = TernNode.Select(x => x.InnerText.Trim()).ToList();
+            return (YearList, TermList, Selectedyear, SelectedTerm);
+        }
     }
 }
