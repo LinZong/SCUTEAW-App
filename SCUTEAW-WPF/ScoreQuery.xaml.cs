@@ -1,21 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using AutoMapper;
+using Newtonsoft.Json.Linq;
 using SCUTEAW_App.Model;
-using SCUTEAW_Lib.Component.Login;
+using SCUTEAW_Lib.Component.Helper;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SCUTEAW_App
 {
@@ -50,7 +41,7 @@ namespace SCUTEAW_App
                     }
                     for (int i = 0; i < info.SelectableTerm.Count; i++)
                     {
-                        if (info.SelectedTerm == ScutEduAdm.TransformTermIndices(info.SelectableTerm[i]))
+                        if (info.SelectedTerm == RequestHelper.TransformTermIndices(info.SelectableTerm[i]))
                         {
                             QueryTermSeason.SelectedIndex = i;
                             break;
@@ -75,25 +66,7 @@ namespace SCUTEAW_App
             List<ScoreItemModel> list = new List<ScoreItemModel>();
             foreach (var item in coll)
             {
-                var CourseName = item.GetValue("kcmc").ToString();
-                var CourseNature = item.GetValue("kcxzmc").ToString();
-                var Score = item.GetValue("bfzcj").ToString();
-                var CourseCredit = item.GetValue("xf").ToString();
-                var CourseGPA = item.GetValue("jd").ToString();
-                var ScoreType = item.GetValue("ksxz").ToString();
-                var CourseCollege = item.GetValue("kkbmmc").ToString();
-                var CourseType = item.GetValue("kclbmc").ToString();
-                list.Add(new ScoreItemModel()
-                {
-                    CourseName = CourseName,
-                    CourseNature = CourseNature,
-                    Score = Score,
-                    CourseCredit = CourseCredit,
-                    CourseGPA = CourseGPA,
-                    ScoreType = ScoreType,
-                    CourseCollege = CourseCollege,
-                    CourseType = CourseType
-                });
+                list.Add(Mapper.Map<ScoreItemModel>(item));
             }
             ScoreListGrid.ItemsSource = list;
         }

@@ -1,21 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using AutoMapper;
+using Newtonsoft.Json.Linq;
 using SCUTEAW_App.Model;
-using SCUTEAW_Lib.Component.Login;
+using SCUTEAW_Lib.Component.Helper;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SCUTEAW_App
 {
@@ -54,7 +46,7 @@ namespace SCUTEAW_App
                     }
                     for (int i = 0; i < info.SelectableTerm.Count; i++)
                     {
-                        if (info.SelectedTerm == ScutEduAdm.TransformTermIndices(info.SelectableTerm[i]))
+                        if (info.SelectedTerm == RequestHelper.TransformTermIndices(info.SelectableTerm[i]))
                         {
                             QueryTermSeason.SelectedIndex = i;
                             break;
@@ -102,18 +94,9 @@ namespace SCUTEAW_App
 
                     foreach (var one in item)
                     {
-                        var HaveCourseRoom = one.GetValue("cdmc").ToString();
-                        var CourseName = one.GetValue("kcmc").ToString();
-                        var HaveCourseWeek = one.GetValue("zcd").ToString() + $"   {item.Key}";
-                        var Teacher = one.GetValue("xm")?.ToString();
-
-                        courseItemColl.Add(new CourseItemModel()
-                        {
-                            CourseName = CourseName,
-                            HaveCourseWeek = HaveCourseWeek,
-                            HaveCourseRoomAndTeacher = $"{HaveCourseRoom}   {Teacher}",
-                            ItemColor = new SolidColorBrush(Colors.Black)
-                        });
+                        var model = Mapper.Map<CourseItemModel>(one);
+                        model.ItemColor = new SolidColorBrush(Colors.Black);
+                        courseItemColl.Add(model);
                     }
                     UserControl CourseShowItem = new UserControl
                     {

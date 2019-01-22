@@ -67,7 +67,7 @@ namespace SCUTEAW_Lib.Component.Network
         }
         public string GetCourseScheduleJson(string Year,string Term)
         {
-            string ReqTerm = ScutEduAdm.TransformTermIndices(Term);
+            string ReqTerm = RequestHelper.TransformTermIndices(Term);
 
             var req = new RestRequest(requestUrl.GetCourseScheduleJsonUrl, Method.POST);
             req.AddParameter(new Parameter("xnm", Year,ParameterType.QueryString));
@@ -78,7 +78,7 @@ namespace SCUTEAW_Lib.Component.Network
 
         public string GetScoreListJson(string Year, string Term)
         {
-            string ReqTerm = ScutEduAdm.TransformTermIndices(Term);
+            string ReqTerm = RequestHelper.TransformTermIndices(Term);
 
             var req = new RestRequest(requestUrl.GetScoreJsonUrl, Method.POST);
             req.AddParameter(new Parameter("xnm", Year, ParameterType.QueryString));

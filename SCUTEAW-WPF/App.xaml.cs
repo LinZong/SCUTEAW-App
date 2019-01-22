@@ -1,11 +1,5 @@
-﻿using SCUTEAW_Lib.Component.Login;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using SCUTEAW_App.MapperRules;
+using SCUTEAW_Lib.Component.Login;
 using System.Windows;
 
 namespace SCUTEAW_App
@@ -18,5 +12,9 @@ namespace SCUTEAW_App
         //define some global variables here.
         public ScutEduAdm EduAdmInstance { get; set; }
         public bool IsInOfflineMode = false;
+        public App()
+        {
+            MapperRulesConfigurator.Configure();
+        }
     }
 }

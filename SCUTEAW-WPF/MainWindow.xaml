@@ -35,7 +35,12 @@
             <TabItem Header="课表查询">
                 <local:CourseSchedule></local:CourseSchedule>
             </TabItem>
-            <TabItem Header="自主选课"></TabItem>
+            <TabItem Header="自主选课">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label HorizontalAlignment="Center">因为作者把关键数据包扔在学校了</Label>
+                    <Label FontSize="30">Coming Soon!</Label>
+                </StackPanel>
+            </TabItem>
         </TabControl>
     </Grid>
     <Window.CommandBindings>

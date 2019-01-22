@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Component\Extractor\ContentExtractor.cs" />
     <Compile Include="Component\Helper\LoginHelper.cs" />
+    <Compile Include="Component\Helper\RequestHelper.cs" />
     <Compile Include="Component\Login\Account.cs" />
     <Compile Include="Component\Main\ScutEduAdm.cs" />
     <Compile Include="Component\Network\EawRequest.cs" />
