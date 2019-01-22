@@ -52,7 +52,7 @@ namespace SCUTEAW_App
             {
                 var Scores = app.EduAdmInstance.ShowRecentScore();
                 if (Scores.Count > 0)
-                    ScoreList = Scores.Select(x => new CourseScore() { CourseName = x.Key, Score = int.Parse(x.Value) }).ToList();
+                    ScoreList = Scores.Select(x => new CourseScore() { CourseName = x.Key, Score = x.Value }).ToList();
                 else ScoreList = new List<CourseScore>();
                 RecentScoreListBox.ItemsSource = ScoreList;
             }), null);

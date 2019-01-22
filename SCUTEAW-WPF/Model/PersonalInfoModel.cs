@@ -17,6 +17,6 @@ namespace SCUTEAW_App.Model
     public class CourseScore
     {
         public string CourseName { get; set; }
-        public int Score { get; set; }
+        public string Score { get; set; }
     }
 }

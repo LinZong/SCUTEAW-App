@@ -178,6 +178,9 @@ namespace SCUTEAW_App
             }
         }
     }
+
+
+
     public static class GridOperationExtension
     {
         public static void AddRows(this RowDefinitionCollection coll, List<RowDefinition> rows)
