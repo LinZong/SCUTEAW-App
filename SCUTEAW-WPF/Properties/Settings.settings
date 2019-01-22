@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ProxyString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://127.0.0.1:9081</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
