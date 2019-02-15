@@ -14,6 +14,7 @@ namespace SCUTEAW_App.Model
         public string CourseName { get; set; }
         public string HaveCourseRoomAndTeacher { get; set; }
         public string HaveCourseWeek { get; set; }
+        public string HaveCourseRange { get; set; }
 
     }
 }

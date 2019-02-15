@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using SCUTEAW_Lib.Component.Login;
 using SCUTEAW_Lib.Component.Network;
+using System;
+
 namespace SCUTEAW_App
 {
     /// <summary>
@@ -18,6 +20,7 @@ namespace SCUTEAW_App
         {
             InitializeComponent();
             app = (Application.Current as App);
+            LoadRememberStudentId();
         }
         private void LoginExit(object sender, RoutedEventArgs e)
         {
@@ -26,8 +29,11 @@ namespace SCUTEAW_App
 
         private void TriggleLoginButton()
         {
-            Passwd_Login_Button.IsEnabled = !Passwd_Login_Button.IsEnabled;
-            Cookie_Login_Button.IsEnabled = !Cookie_Login_Button.IsEnabled;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Passwd_Login_Button.IsEnabled = !Passwd_Login_Button.IsEnabled;
+                Cookie_Login_Button.IsEnabled = !Cookie_Login_Button.IsEnabled;
+            }), null);
         }
         private void PasswordModeLogin(object sender, RoutedEventArgs e)
         {
@@ -66,6 +72,7 @@ namespace SCUTEAW_App
             // Try to login.
 
             TriggleLoginButton();
+
             PrepareEduAdmInstance();
             if (app.EduAdmInstance.LoginScutEduAdm(LoginType.UseCookie, out string FailedResult, StuId, Jsession, JwxtToken))
             {
@@ -83,6 +90,7 @@ namespace SCUTEAW_App
         }
         private void PrepareEduAdmInstance()
         {
+            SaveRememberStudentId();
             if (app.EduAdmInstance == null)
             {
                 app.EduAdmInstance = string.IsNullOrEmpty(Properties.Settings.Default.ProxyString) ?
@@ -118,9 +126,28 @@ namespace SCUTEAW_App
             Properties.Settings.Default.Save();
             MessageBox.Show("Setting saved successfully.", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        private void LoadRememberStudentId()
+        {
+            if (Properties.Settings.Default.RememberMe && !string.IsNullOrEmpty(Properties.Settings.Default.StudentIdRemember))
+            {
+                Login_Passwd_StudentId.Text = Login_Token_StudentId.Text = Properties.Settings.Default.StudentIdRemember;
+            }
+            else
+            {
+                Properties.Settings.Default.StudentIdRemember = string.Empty;
+                Properties.Settings.Default.Save();
+            }
+        }
+        private void SaveRememberStudentId()
+        {
+            int idx = LoginModeSwitcher.SelectedIndex;
+            if (Properties.Settings.Default.RememberMe)
+            {
+                Properties.Settings.Default.StudentIdRemember = idx == 0 ? Login_Passwd_StudentId.Text : Login_Token_StudentId.Text;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
-
-
-
 
 }

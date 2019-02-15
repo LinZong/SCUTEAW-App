@@ -29,7 +29,7 @@ namespace SCUTEAW_App.MapperRules
         {
             if (jObj.TryGetValue(ValueAttribute, out JToken token))
                 return token.ToString();
-            else return "";// as null.
+            else return string.Empty;// as null.
         }
         public static void ConfigJTokenToString<TViewModel,TDestMember>(this IMemberConfigurationExpression<JObject, TViewModel, TDestMember> opt, string ValueAttribute)
         {

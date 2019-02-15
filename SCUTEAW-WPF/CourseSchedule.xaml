@@ -30,6 +30,7 @@
                                 <StackPanel Margin="10,0,0,0">
                                     <TextBlock Foreground="{Binding ItemColor}" TextWrapping="Wrap" FontSize="13" Text="{Binding HaveCourseRoomAndTeacher}"></TextBlock>
                                     <TextBlock Foreground="{Binding ItemColor}" TextWrapping="Wrap" FontSize="13" Text="{Binding HaveCourseWeek}"></TextBlock>
+                                    <TextBlock Foreground="{Binding ItemColor}" TextWrapping="Wrap" FontSize="13" Text="{Binding HaveCourseRange}"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>

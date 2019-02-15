@@ -34,5 +34,29 @@ namespace SCUTEAW_App.Properties {
                 this["ProxyString"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RememberMe {
+            get {
+                return ((bool)(this["RememberMe"]));
+            }
+            set {
+                this["RememberMe"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string StudentIdRemember {
+            get {
+                return ((string)(this["StudentIdRemember"]));
+            }
+            set {
+                this["StudentIdRemember"] = value;
+            }
+        }
     }
 }

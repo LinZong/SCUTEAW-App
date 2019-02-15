@@ -95,6 +95,7 @@ namespace SCUTEAW_App
                     foreach (var one in item)
                     {
                         var model = Mapper.Map<CourseItemModel>(one);
+                        model.HaveCourseRange = $"{item.Key}  节";
                         model.ItemColor = new SolidColorBrush(Colors.Black);
                         courseItemColl.Add(model);
                     }
