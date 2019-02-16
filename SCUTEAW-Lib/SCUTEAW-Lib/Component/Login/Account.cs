@@ -30,7 +30,6 @@ namespace SCUTEAW_Lib.Component.Login
             try
             {
                 (string mod, string expo, string csrf) = Request.GetLoginInfo(studentId, password);
-
                 int Exit = 999;
                 var EncryptPasswd = LoginHelper.EncryptPassword(mod, expo, password, out Exit);
                 var param = new List<KeyValuePair<string, string>>();
@@ -49,8 +48,8 @@ namespace SCUTEAW_Lib.Component.Login
                     }
                     else FailedResult = "Username or password is wrong.";
                 }
+                else if (response.StatusCode == HttpStatusCode.OK) FailedResult = "Username or password is wrong.";
                 else FailedResult = "Request time out.";
-
                 IsLoginIn = false;
                 return false;
             }

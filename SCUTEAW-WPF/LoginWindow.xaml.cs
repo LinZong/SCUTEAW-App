@@ -18,9 +18,11 @@ namespace SCUTEAW_App
         private readonly App app;
         public LoginWindow()
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             app = (Application.Current as App);
             LoadRememberStudentId();
+
         }
         private void LoginExit(object sender, RoutedEventArgs e)
         {
