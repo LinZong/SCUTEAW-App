@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Threading;
+using System.Web.UI.WebControls;
+using System.Windows.Media.Imaging;
 using SCUTEAW_Lib.Component.Extractor;
 using SCUTEAW_Lib.Component.Helper;
 using SCUTEAW_Lib.Component.Network;
 using SCUTEAW_Lib.Model.Login;
+
 namespace SCUTEAW_Lib.Component.Login
 {
     public class ScutEduAdm
@@ -48,12 +52,13 @@ namespace SCUTEAW_Lib.Component.Login
                     return false;
             }
         }
-        public (string major, string name) ShowPersonalInfo()
+        public (string major, string name,MemoryStream AvatarBuffer) ShowPersonalInfo()
         {
             if (CheckLoginStatus())
             {
-                var rawInfo = Request.GetPersonalInfo(account.UserAccount.StudentId);
-                return ContentExtractor.ExtractPersonalInfo(rawInfo);
+                (string rawInfo,MemoryStream AvatarBuffer) = Request.GetPersonalInfo(account.UserAccount.StudentId);
+                var ExtractedPersonalInfo = ContentExtractor.ExtractPersonalInfo(rawInfo);
+                return (ExtractedPersonalInfo.Major, ExtractedPersonalInfo.Name, AvatarBuffer);
             }
             throw new Exception("Account isn't Logined.");
         }

@@ -5,6 +5,7 @@
     "GetPublicKeyUrl":"/xtgl/login_getPublicKey.html?time=",
     "LogoutUrl":"/logout?t={0}&login_type=",
     "GetPersonalInfoUrl":"/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={0}&gnmkdm=index&su={1}",
+    "GetPersonalAvatarUrl":"/xtgl/photo_cxXszp.html?xh_id={0}&zplx=rxhzp",
     "GetRecentScoreUrl":"/xtgl/index_cxAreaFour.html?localeKey=zh_CN&gnmkdm=index&su={0}",
     "GetRecentCourseUrl":"/xtgl/index_cxAreaOne.html?localeKey=zh_CN&gnmkdm=index&su={0}",
     "GetCourseScheduleJsonUrl":"/kbcx/xskbcx_cxXsKb.html?gnmkdm=N2151",

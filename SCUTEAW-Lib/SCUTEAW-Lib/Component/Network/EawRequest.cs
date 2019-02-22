@@ -10,6 +10,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using System;
 using SCUTEAW_Lib.Component.Login;
+using System.IO;
 
 namespace SCUTEAW_Lib.Component.Network
 {
@@ -94,10 +95,26 @@ namespace SCUTEAW_Lib.Component.Network
             var res = client.Execute(req);
             return res.Content;
         }
-        public string GetPersonalInfo(string StuId)
+        public (string PersonalInfo,MemoryStream PersonalAvatarBuffer) GetPersonalInfo(string StuId)
         {
-            var resp = ExecuteGetRequest(requestUrl.GetPersonalInfoUrl, LoginHelper.DateTimeNowUnix().ToString(),StuId);
-            return resp.Content;
+            var PersonalInfo = ExecuteGetRequest(requestUrl.GetPersonalInfoUrl, LoginHelper.DateTimeNowUnix().ToString(),StuId);
+            var PersonalAvatar = ExecuteGetRequest(requestUrl.GetPersonalAvatarUrl,StuId);
+            var ImageBuffer = new MemoryStream();
+            try
+            {
+                
+                if (PersonalAvatar.StatusCode == HttpStatusCode.OK)
+                {
+                    var ImageRawBytesArray = PersonalAvatar.RawBytes;
+                    ImageBuffer.Write(ImageRawBytesArray, 0, ImageRawBytesArray.Length);
+                    ImageBuffer.Flush();
+                }
+            }
+            catch (Exception)
+            {
+                
+            }
+            return (PersonalInfo.Content,ImageBuffer);
         }
         public string GetRecentScoreInfo(string StuId)
         {

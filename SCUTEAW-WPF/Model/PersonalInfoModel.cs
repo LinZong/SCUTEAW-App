@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace SCUTEAW_App.Model
 {
@@ -12,6 +13,7 @@ namespace SCUTEAW_App.Model
         public string Major { get; set; }
         public string StudentId { get; set; }
         public string LoginMode { get; set; }
+        public BitmapImage Avatar { get; set; }
     }
 
     public class CourseScore

@@ -39,7 +39,7 @@
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Column="0" VerticalAlignment="Center">
                     <Border Width="{Binding ElementName=PersonAvatarImage, Path=Width, Mode=OneWay}" Height="{Binding ElementName=PersonAvatarImage, Path=Height, Mode=OneWay}">
-                        <Image x:Name="PersonAvatarImage" Source="Resources/Icon/user_logo.jpg" />
+                        <Image x:Name="PersonAvatarImage" Source="{Binding Avatar}"/>
                     </Border>
                 </WrapPanel>
                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
